@@ -10,48 +10,85 @@ class EmailResanGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("EmailResan - پروژه ایمیل‌رسان")
-        self.root.geometry("700x600")
+        self.root.geometry("700x500")
         self.root.resizable(False, False)
+
+        # Modern color scheme
+        bg_color = "#f5f6fa"
+        accent_color = "#4078c0"
+        button_color = "#00b894"
+        button_fg = "#fff"
+        frame_color = "#dfe6e9"
+
+        self.root.configure(bg=bg_color)
 
         self.excel_path = ""
         self.txt_path = ""
 
+        # Main frame for padding and rounded corners
+        main_frame = tk.Frame(root, bg=frame_color, bd=2, relief="groove")
+        main_frame.place(relx=0.5, rely=0.5, anchor="center", width=420, height=380)
+
         # Title
         tk.Label(
-            root,
+            main_frame,
             text="📧 پروژه ایمیل‌رسان",
-            font=("Vazirmatn", 20, "bold")
-        ).pack(pady=10)
+            font=("Vazirmatn", 22, "bold"),
+            bg=frame_color,
+            fg=accent_color
+        ).pack(pady=(20, 10))
 
         # Excel Button
-        tk.Button(
-            root,
+        self.excel_btn = tk.Button(
+            main_frame,
             text="انتخاب فایل Excel",
-            width=25,
+            font=("Vazirmatn", 13),
+            width=22,
+            bg=button_color,
+            fg=button_fg,
+            activebackground=accent_color,
+            activeforeground=button_fg,
+            relief="flat",
+            cursor="hand2",
             command=self.select_excel
-        ).pack(pady=5)
+        )
+        self.excel_btn.pack(pady=8)
 
         # TXT Button
-        tk.Button(
-            root,
+        self.txt_btn = tk.Button(
+            main_frame,
             text="انتخاب فایل متن پیام",
-            width=25,
+            font=("Vazirmatn", 13),
+            width=22,
+            bg=button_color,
+            fg=button_fg,
+            activebackground=accent_color,
+            activeforeground=button_fg,
+            relief="flat",
+            cursor="hand2",
             command=self.select_txt
-        ).pack(pady=5)
+        )
+        self.txt_btn.pack(pady=8)
 
         # Send Button
-        tk.Button(
-            root,
+        self.send_btn = tk.Button(
+            main_frame,
             text="ارسال ایمیل‌ها",
-            width=25,
-            bg="green",
-            fg="white",
+            font=("Vazirmatn", 14, "bold"),
+            width=22,
+            bg=accent_color,
+            fg=button_fg,
+            activebackground=button_color,
+            activeforeground=button_fg,
+            relief="flat",
+            cursor="hand2",
             command=self.send_emails
-        ).pack(pady=20)
+        )
+        self.send_btn.pack(pady=18)
 
         # Status Label
-        self.status_label = tk.Label(root, text="", fg="blue")
-        self.status_label.pack()
+        self.status_label = tk.Label(main_frame, text="", fg=accent_color, bg=frame_color, font=("Vazirmatn", 12))
+        self.status_label.pack(pady=(10, 0))
 
     def select_excel(self):
         self.excel_path = filedialog.askopenfilename(
