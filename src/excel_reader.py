@@ -2,7 +2,7 @@ import openpyxl as xl
 
 # baz kardan file excel
 # va entekhan safhe faal
-wb = xl.load_workbook('data/Devops.xlsx')
+wb = xl.load_workbook('../data/test.xlsx')
 ws = wb.active
 
 # for x in ws['c']: print(x.value) 
@@ -19,5 +19,8 @@ for i in range(2,h+1):
     user_email[name] = email
 
 
+if __name__ == "__main__":
+    for a,b in user_email.items():
+        print(f'{a}:{b}')
 
 
