@@ -1,4 +1,4 @@
-def personalize_message(name, file_path = r"C:\Users\Alireza\Documents\uni\Emailresan\data\message.txt"):
+def personalize_message(name, file_path = "../data/message.txt"):
     # فایل رو بخون
     with open(file_path, "r", encoding="utf-8") as f:
         template = f.read()
