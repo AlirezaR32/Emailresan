@@ -1,3 +1,4 @@
+import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from main import main
@@ -112,11 +113,18 @@ class EmailResanGUI:
             )
             return
 
-        main(self.excel_path , self.)
-        messagebox.showinfo(
-            "موفق",
-            "ارسال ایمیل‌ها با موفقیت انجام شد (نسخه تست)"
-        )
+        # Run sending in a background thread so the GUI stays responsive.
+        self.status_label.config(text="در حال ارسال...")
+        threading.Thread(target=self._run_main, daemon=True).start()
+
+    def _run_main(self):
+        try:
+            main(self.excel_path, self.txt_path)
+            self.root.after(0, lambda: messagebox.showinfo("موفق", "ارسال ایمیل‌ها با موفقیت انجام شد (نسخه تست)"))
+            self.root.after(0, lambda: self.status_label.config(text="ارسال انجام شد"))
+        except Exception as e:
+            self.root.after(0, lambda: messagebox.showerror("خطا", f"خطا در ارسال: {e}"))
+            self.root.after(0, lambda: self.status_label.config(text="خطا در ارسال"))
 
 
 if __name__ == "__main__":

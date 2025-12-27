@@ -1,28 +1,27 @@
 import openpyxl as xl
 
-def read_excel(excel_path = "data/test.xlsx"):
-    # baz kardan file excel
-    # va entekhan safhe faal
+def user_email(excel_path: str = "data/test.xlsx") -> dict:
+    """Read users and emails from the first sheet of an Excel file.
+
+    Expects names in column A and emails in column B. Skips empty rows.
+    Returns a dict mapping name -> email.
+    """
     wb = xl.load_workbook(excel_path)
     ws = wb.active
 
-    # for x in ws['c']: print(x.value) 
-
-    # ertefa jadval
-    h = len(ws["a"])
-
-    # sakht dictinary khali va ezafeh kardan etelat
-    user_email = {}
-    for i in range(2,h+1):
-        name = ws[f"a{i}"].value
-        email = ws[f"b{i}"].value
-
-        user_email[name] = email
-    return user_email
+    max_row = ws.max_row
+    users = {}
+    for i in range(2, max_row + 1):
+        name = ws[f"A{i}"].value
+        email = ws[f"B{i}"].value
+        if not name or not email:
+            continue
+        users[str(name).strip()] = str(email).strip()
+    return users
 
 
 if __name__ == "__main__":
-    for a,b in read_excel().items():
-        print(f'{a}:{b}')
+    for a, b in user_email().items():
+        print(f"{a}:{b}")
 
 
