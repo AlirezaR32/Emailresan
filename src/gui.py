@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from main import main
 
-# این‌ها بعداً به کد رفیع و ناصری وصل می‌شوند
 # from excel_reader import read_users
 # from mail_sender import send_email
 
@@ -112,7 +112,7 @@ class EmailResanGUI:
             )
             return
 
-        # اینجا بعداً منطق اصلی وصل می‌شود
+        main(self.excel_path , self.)
         messagebox.showinfo(
             "موفق",
             "ارسال ایمیل‌ها با موفقیت انجام شد (نسخه تست)"

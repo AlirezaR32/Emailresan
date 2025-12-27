@@ -1,13 +1,13 @@
 def personalize_message(name, file_path = "../data/message.txt"):
-    # فایل رو بخون
+    # khondan file  
     with open(file_path, "r", encoding="utf-8") as f:
         template = f.read()
     
-    # جایگزین کن
+    # tagir bedeh
     message = template.replace("{name}", name)
     return message
 
-# تست
+# test
 if __name__ == "__main__":
     msg = personalize_message("علیرضا")
     print(msg)
